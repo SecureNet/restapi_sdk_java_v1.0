@@ -47,9 +47,9 @@ public class PaymentsControllerTest {
 	 * required transaction identifier and guaranteee the order of operation.
 	 */
 	@Test
-	public void creditcardpresentauthorizationOnlyandpriorAuthCapturerequestsreturnssuccessfully()
+	public void creditCardPresentAuthorizationOnlyAndPriorAuthCaptureRequestsReturnsSuccessfully()
 			throws Exception {
-		int transactionId = creditcardpresentauthorizationOnlyrequestreturnssuccessfully();
+		int transactionId = creditCardPresentAuthorizationOnlyRequestReturnsSuccessfully();
 		PriorAuthCaptureRequest request = new PriorAuthCaptureRequest();
 		request.setAmount(20d);
 		request.setTransactionId(transactionId);
@@ -66,7 +66,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/creditcardpresent.html?lang
 	 * =JSON#authonly
 	 */
-	private int creditcardpresentauthorizationOnlyrequestreturnssuccessfully()
+	private int creditCardPresentAuthorizationOnlyRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		AuthorizeRequest request = new AuthorizeRequest();
@@ -90,7 +90,7 @@ public class PaymentsControllerTest {
 	 * ://apidocs.securenet.com/docs/creditcardpresent.html?lang=JSON#charge
 	 */
 	@Test
-	public void creditcardpresentchargerequestreturnssuccessfully()
+	public void creditCardPresentChargeRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -114,9 +114,9 @@ public class PaymentsControllerTest {
 	 * required transaction identifier and guaranteee the order of operation.
 	 */
 	@Test
-	public void creditcardpresentincludeTipauthorizationOnlyandpriorAuthCapturerequestsreturnssuccessfully()
+	public void creditCardPresentIncludeTipAuthorizationOnlyAndPriorAuthCaptureRequestsReturnsSuccessfully()
 			throws Exception {
-		int transactionId = creditcardpresentincludeTipauthorizationOnlyrequestreturnssuccessfully();
+		int transactionId = creditCardPresentIncludeTipAuthorizationOnlyRequestReturnsSuccessfully();
 		// Arrange
 		PriorAuthCaptureRequest request = new PriorAuthCaptureRequest();
 		request.setAmount(20d);
@@ -136,7 +136,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/creditcardpresent
 	 * .html?lang=JSON#includetip
 	 */
-	private int creditcardpresentincludeTipauthorizationOnlyrequestreturnssuccessfully()
+	private int creditCardPresentIncludeTipAuthorizationOnlyRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		AuthorizeRequest request = new AuthorizeRequest();
@@ -161,7 +161,7 @@ public class PaymentsControllerTest {
 	 * .html?lang=JSON#includeaddress
 	 */
 	@Test
-	public void creditcardpresentchargerequestincludingaddressreturnssuccessfully()
+	public void creditCardPresentChargeRequestIncludingAddressReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -184,9 +184,9 @@ public class PaymentsControllerTest {
 	 * required transaction identifier and guaranteee the order of operation.
 	 */
 	@Test
-	public void creditcardnotpresentauthorizationOnlyandpriorAuthCapturerequestsreturnssuccessfully()
+	public void creditCardNotPresentAuthorizationOnlyAndPriorAuthCaptureRequestsReturnsSuccessfully()
 			throws Exception {
-		int transactionId = creditcardnotpresentauthorizationOnlyrequestreturnssuccessfully();
+		int transactionId = creditCardNotPresentAuthorizationOnlyRequestReturnsSuccessfully();
 		PriorAuthCaptureRequest request = new PriorAuthCaptureRequest();
 		request.setAmount(10d);
 		request.setDeveloperApplication(getDeveloperApplication());
@@ -205,7 +205,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/creditcardnotpresent.html
 	 * ?lang=JSON#authonly
 	 */
-	private int creditcardnotpresentauthorizationOnlyrequestreturnssuccessfully()
+	private int creditCardNotPresentAuthorizationOnlyRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		AuthorizeRequest request = new AuthorizeRequest();
@@ -231,7 +231,7 @@ public class PaymentsControllerTest {
 	 * =JSON#charge
 	 */
 	@Test
-	public void creditcardnotpresentchargeauthorizationandcapturerequestreturnssuccessfully()
+	public void creditCardNotPresentChargeAuthorizationAndCaptureRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -258,7 +258,7 @@ public class PaymentsControllerTest {
 	 * .securenet.com/docs/creditcardnotpresent.html?lang=JSON#includeaddress
 	 */
 	@Test
-	public void creditcardnotpresentincludeaddresrequestreturnssuccessfully()
+	public void creditCardNotPresentIncludeAddresRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -283,7 +283,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/creditcardnotpresent.html?lang=csharp#
 	 * tokenization
 	 */
-	private void creditcardnotpresentchargeusingtokenizationrequestreturnssuccessfully(
+	private void creditCardNotPresentChargeUsingTokenizationRequestReturnsSuccessfully(
 			String token) throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -308,7 +308,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/ach.html?lang=csharp#charge
 	 */
 	@Test
-	public void aCHpaybycheckchargerequestreturnssuccessfully()
+	public void achPayByCheckChargeRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -330,7 +330,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/ach.html?lang=csharp#chargepos
 	 */
 	@Test
-	public void aCHchargeaccountusingPOSrequestreturnssuccessfully()
+	public void achChargeAccountUsingPOSRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -367,7 +367,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/ach.html?lang=csharp#billaddress
 	 */
 	@Test
-	public void aCHaddbillingaddresschargerequestreturnssuccessfully()
+	public void achAddBillingAddressChargeRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -394,7 +394,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/ach.html?lang=csharp#verification
 	 */
 	@Test
-	public void aCHpayingbycheckwithverificationchargerequestreturnssuccessfully()
+	public void achPayingByCheckWithVerificationChargeRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -420,7 +420,7 @@ public class PaymentsControllerTest {
 	 * https://apidocs.securenet.com/docs/credits.html?lang=csharp
 	 */
 	@Test
-	public void creditscreditanaccountrequestreturnssuccessfully()
+	public void creditsCreditAnAccountRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		CreditRequest request = new CreditRequest();
@@ -443,9 +443,9 @@ public class PaymentsControllerTest {
 	 * guaranteee the order of operation.
 	 */
 	@Test
-	public void refundsChargeandrefundrequestsreturnssuccessfully()
+	public void refundsChargeAndRefundRequestsReturnsSuccessfully()
 			throws Exception {
-		int transactionId = refundschargerequestreturnssuccessfully();
+		int transactionId = refundsChargeRequestReturnsSuccessfully();
 		RefundRequest request = new RefundRequest();
 		request.setDeveloperApplication(getDeveloperApplication());
 		request.setTransactionId(transactionId);
@@ -462,7 +462,7 @@ public class PaymentsControllerTest {
 	 * https
 	 * ://apidocs.securenet.com/docs/creditcardpresent.html?lang=JSON#charge
 	 */
-	private int refundschargerequestreturnssuccessfully() throws Exception {
+	private int refundsChargeRequestReturnsSuccessfully() throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
 		request.setCard(getCard());
@@ -485,9 +485,9 @@ public class PaymentsControllerTest {
 	 * guaranteee the order of operation.
 	 */
 	@Test
-	public void voidschargeandvoidrequestsreturnssuccessfully()
+	public void voidChargeAndVoidRequestsReturnsSuccessfully()
 			throws Exception {
-		int transactionId = voidschargerequestreturnssuccessfully();
+		int transactionId = voidChargeRequestReturnsSuccessfully();
 		VoidRequest request = new VoidRequest();
 		request.setTransactionId(transactionId);
 		request.setDeveloperApplication(getDeveloperApplication());
@@ -504,7 +504,7 @@ public class PaymentsControllerTest {
 	 * https
 	 * ://apidocs.securenet.com/docs/creditcardpresent.html?lang=JSON#charge
 	 */
-	private int voidschargerequestreturnssuccessfully() throws Exception {
+	private int voidChargeRequestReturnsSuccessfully() throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
 		request.setCard(getCard());
