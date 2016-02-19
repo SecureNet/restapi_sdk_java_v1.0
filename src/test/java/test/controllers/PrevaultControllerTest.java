@@ -53,7 +53,7 @@ public class PrevaultControllerTest
     }
 	
 	@Test
-    public void tokenizationcreatetokenusingcheckinginformationrequestreturnssuccessfully() throws Exception {
+    public void tokenizationCreateTokenUsingCheckingInformationRequestReturnsSuccessfully() throws Exception {
         TokenCheckRequest request = new TokenCheckRequest();
         request.setCheck(getCheck());
         request.setDeveloperApplication(getDeveloperApplication());

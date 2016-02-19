@@ -37,7 +37,7 @@ public class BatchesControllerTest
     * https://apidocs.securenet.com/docs/settlement.html?lang=csharp#closebatch
     */
 	@Test
-    public void settlementclosebatchrequestreturnssuccessfully() throws Exception {
+    public void settlementCloseBatchRequestReturnsSuccessfully() throws Exception {
 		getBatchCloseResponse();
     }
 
@@ -46,7 +46,7 @@ public class BatchesControllerTest
     * https://apidocs.securenet.com/docs/settlement.html?lang=csharp#retrievebatch
     */
 	@Test
-    public void settlementretrieveclosedbatchrequestreturnssuccessfully() throws Exception {
+    public void settlementRetrieveClosedBatchRequestReturnsSuccessfully() throws Exception {
         // Arrange
     	BatchCloseResponse closeResponse = getBatchCloseResponse();
     	
@@ -66,7 +66,7 @@ public class BatchesControllerTest
     * https://apidocs.securenet.com/docs/settlement.html?lang=csharp#currentbatch
     */
 	@Test
-    public void settlementretrievingcurrentbatchrequestreturnssuccessfully() throws Exception {
+    public void settlementRetrievingCurrentBatchRequestReturnsSuccessfully() throws Exception {
         // Arrange
         BatchCurrentRequest request = new BatchCurrentRequest();
         request.setDeveloperApplication(getDeveloperApplication());

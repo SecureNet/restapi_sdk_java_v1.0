@@ -29,7 +29,6 @@ import SecureNetRestApiSDK.Api.Requests.AddRecurringPaymentPlanRequest;
 import SecureNetRestApiSDK.Api.Requests.AddVariablePaymentPlanRequest;
 import SecureNetRestApiSDK.Api.Requests.ChargeRequest;
 import SecureNetRestApiSDK.Api.Requests.CreateCustomerRequest;
-import SecureNetRestApiSDK.Api.Requests.DeletePaymentPlanRequest;
 import SecureNetRestApiSDK.Api.Requests.RemovePaymentMethodRequest;
 import SecureNetRestApiSDK.Api.Requests.RetrieveCustomerRequest;
 import SecureNetRestApiSDK.Api.Requests.RetrievePaymentAccountRequest;
@@ -46,7 +45,6 @@ import SecureNetRestApiSDK.Api.Responses.AddRecurringPaymentPlanResponse;
 import SecureNetRestApiSDK.Api.Responses.AddVariablePaymentPlanResponse;
 import SecureNetRestApiSDK.Api.Responses.ChargeResponse;
 import SecureNetRestApiSDK.Api.Responses.CreateCustomerResponse;
-import SecureNetRestApiSDK.Api.Responses.DeletePaymentPlanResponse;
 import SecureNetRestApiSDK.Api.Responses.RemovePaymentMethodResponse;
 import SecureNetRestApiSDK.Api.Responses.RetrieveCustomerResponse;
 import SecureNetRestApiSDK.Api.Responses.RetrievePaymentAccountResponse;
@@ -77,14 +75,14 @@ public class CustomersControllerTest {
 	 * 
 	 */
 	@Test
-	public void secureNetvaultcreateretrieveupdateanddeletecustomerrequestsreturnssuccessfully()
+	public void secureNetVaultCreateRetrieveAndUpdateCustomerRequestsReturnsSuccessfully()
 			throws Exception {
 		// Create the Customer
-		String customerId = secureNetvaultcreatecustomerrequestreturnssuccessfully();
+		String customerId = secureNetVaultCreateCustomerRequestReturnsSuccessfully();
 		// Retrieve the Customer
-		secureNetvaultretrievecustomerrequestreturnssuccessfully(customerId);
+		secureNetVaultRetrieveCustomerRequestReturnsSuccessfully(customerId);
 		// Update the Customer
-		secureNetvaultupdatecustomerrequestreturnssuccessfully(customerId);
+		secureNetVaultUpdateCustomerRequestReturnsSuccessfully(customerId);
 	}
 
 	/**
@@ -93,23 +91,23 @@ public class CustomersControllerTest {
 	 * payment method identifier and to guaranteee the order of operation.
 	 */
 	@Test
-	public void secureNetvaultcreateretrievechargeupdateanddeletepaymentaccountrequestsreturnssuccessfully()
+	public void secureNetVaultCreateRetrieveChargeUpdateAndDeletePaymentAccountRequestsReturnsSuccessfully()
 			throws Exception {
 		// Create the Customer
-		String customerId = secureNetvaultcreatecustomerrequestreturnssuccessfully();
+		String customerId = secureNetVaultCreateCustomerRequestReturnsSuccessfully();
 		// Create the Payment Account
-		String paymentMethodId = secureNetvaultcreatepaymentaccountrequestreturnssuccessfully(customerId);
+		String paymentMethodId = secureNetVaultCreatePaymentAccountRequestReturnsSuccessfully(customerId);
 		// Retrieve the Payment Account
-		secureNetvaultretrievepaymentaccountrequestreturnssuccessfully(
+		secureNetVaultRetrievePaymentAccountRequestReturnsSuccessfully(
 				customerId, paymentMethodId);
 		// Pay using a Stored Vault Account
-		secureNetvaultpaywithstoredvaultaccountrequestreturnssuccessfully(
+		secureNetVaultPayWithStoredVaultAccountRequestReturnsSuccessfully(
 				customerId, paymentMethodId);
 		// Update the Payment Account
-		secureNetvaultupdatepaymentaccountrequestreturnssuccessfully(
+		secureNetVaultUpdatePaymentAccountRequestReturnsSuccessfully(
 				customerId, paymentMethodId);
 		// Delete the Payment Account
-		secureNetvaultdeletepaymentaccountrequestreturnssuccessfully(
+		secureNetVaultDeletePaymentAccountRequestReturnsSuccessfully(
 				customerId, paymentMethodId);
 	}
 
@@ -165,27 +163,24 @@ public class CustomersControllerTest {
 	 * guaranteee the order of operation.
 	 */
 	@Test
-	public void recurringbillingcreateretrieveupdateanddeleteinstallmentplanrequestsreturnssuccessfully()
+	public void recurringBillingCreateRetrieveUpdateAndDeleteInstallmentPlanRequestsReturnsSuccessfully()
 			throws Exception {
 		// Create the Customer
-		String customerId = secureNetvaultcreatecustomerrequestreturnssuccessfully();
+		String customerId = secureNetVaultCreateCustomerRequestReturnsSuccessfully();
 		// Create the Payment Account
-		String paymentMethodId = secureNetvaultcreatepaymentaccountrequestreturnssuccessfully(customerId);
+		String paymentMethodId = secureNetVaultCreatePaymentAccountRequestReturnsSuccessfully(customerId);
 		// Create the Installment Plan
-		String planId = recurringbillingcreateinstallmentplanrequestreturnssuccessfully(
+		String planId = recurringBillingCreateInstallmentPlanRequestReturnsSuccessfully(
 				customerId, paymentMethodId);
 		// Retrieve the Installment Plan
-		recurringbillingretrievepaymentplanrequestreturnssuccessfully(
+		recurringBillingRetrievePaymentPlanRequestReturnsSuccessfully(
 				customerId, planId);
 		// Update the Installment Plan
-		/*recurringbillingupdateinstallmentplanrequestreturnssuccessfully(
+		/*recurringBillingUpdateInstallmentPlanRequestReturnsSuccessfully(
 				customerId, planId);*/
-		// Delete the Installment Plan
-		recurringbillingdeletepaymentplanrequestreturnssuccessfully(
-				customerId, planId);
 		// Delete the Payment Account
-		secureNetvaultdeletepaymentaccountrequestreturnssuccessfully(
-				customerId, paymentMethodId);
+		/*secureNetVaultDeletePaymentAccountRequestReturnsSuccessfully(
+				customerId, paymentMethodId);*/
 	}
 
 	/**
@@ -196,27 +191,24 @@ public class CustomersControllerTest {
 	 * the plan identifier and to guaranteee the order of operation.
 	 */
 	@Test
-	public void recurringbillingcreateretrieveupdateanddeleterecurringpaymentplanrequestsreturnssuccessfully()
+	public void recurringBillingCreateRetrieveUpdateAndDeleteRecurringPaymentPlanRequestsReturnsSuccessfully()
 			throws Exception {
 		// Create the Customer
-		String customerId = secureNetvaultcreatecustomerrequestreturnssuccessfully();
+		String customerId = secureNetVaultCreateCustomerRequestReturnsSuccessfully();
 		// Create the Payment Account
-		String paymentMethodId = secureNetvaultcreatepaymentaccountrequestreturnssuccessfully(customerId);
+		String paymentMethodId = secureNetVaultCreatePaymentAccountRequestReturnsSuccessfully(customerId);
 		// Create the Recurring Payment Plan
-		String planId = recurringbillingcreaterecurringpaymentplanrequestreturnssuccessfully(
+		String planId = recurringBillingCreateRecurringPaymentPlanRequestReturnsSuccessfully(
 				customerId, paymentMethodId);
 		// Retrieve the Recurring Payment Plan
-		recurringbillingretrievepaymentplanrequestreturnssuccessfully(
+		recurringBillingRetrievePaymentPlanRequestReturnsSuccessfully(
 				customerId, planId);
 		// Update the Recurring Payment Plan
-		recurringbillingupdaterecurringpaymentplanrequestreturnssuccessfully(
-				customerId, planId);
-		// Delete the Recurring Payment Plan
-		recurringbillingdeletepaymentplanrequestreturnssuccessfully(
+		recurringBillingUpdateRecurringPaymentPlanRequestReturnsSuccessfully(
 				customerId, planId);
 		// Delete the Payment Account
-		secureNetvaultdeletepaymentaccountrequestreturnssuccessfully(
-				customerId, paymentMethodId);
+		/*secureNetVaultDeletePaymentAccountRequestReturnsSuccessfully(
+				customerId, paymentMethodId);*/
 	}
 	
 	/**
@@ -224,7 +216,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/vault.html?lang=csharp#createcustomer
 	 */
 
-	private String secureNetvaultcreatecustomerrequestreturnssuccessfully()
+	private String secureNetVaultCreateCustomerRequestReturnsSuccessfully()
 			throws Exception {
 		// Arrange
 		CreateCustomerRequest request = getCreateCustomerRequestObject();
@@ -245,7 +237,7 @@ public class CustomersControllerTest {
 	 * request.
 	 * https://apidocs.securenet.com/docs/vault.html?lang=csharp#payaccount
 	 */
-	private void secureNetvaultpaywithstoredvaultaccountrequestreturnssuccessfully(
+	private void secureNetVaultPayWithStoredVaultAccountRequestReturnsSuccessfully(
 			String customerId, String paymentMethodId) throws Exception {
 		// Arrange
 		ChargeRequest request = new ChargeRequest();
@@ -267,7 +259,7 @@ public class CustomersControllerTest {
 	 * https://apidocs
 	 * .securenet.com/docs/vault.html?lang=csharp#retrievecustomer
 	 */
-	private void secureNetvaultretrievecustomerrequestreturnssuccessfully(
+	private void secureNetVaultRetrieveCustomerRequestReturnsSuccessfully(
 			String customerId) throws Exception {
 		// Arrange
 		RetrieveCustomerRequest request = new RetrieveCustomerRequest();
@@ -287,7 +279,7 @@ public class CustomersControllerTest {
 	 * Successful response returned from an Update Customer request.
 	 * https://apidocs.securenet.com/docs/vault.html?lang=csharp#updatecustomer
 	 */
-	private void secureNetvaultupdatecustomerrequestreturnssuccessfully(
+	private void secureNetVaultUpdateCustomerRequestReturnsSuccessfully(
 			String customerId) throws Exception {
 		// Arrange
 		UpdateCustomerRequest request = new UpdateCustomerRequest();
@@ -312,7 +304,7 @@ public class CustomersControllerTest {
 	 * Successful response returned from a Create Payment Account request.
 	 * https://apidocs.securenet.com/docs/vault.html?lang=csharp#createaccount
 	 */
-	private String secureNetvaultcreatepaymentaccountrequestreturnssuccessfully(
+	private String secureNetVaultCreatePaymentAccountRequestReturnsSuccessfully(
 			String customerId) throws Exception {
 		// Arrange
 		AddPaymentMethodRequest request = new AddPaymentMethodRequest();
@@ -336,7 +328,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/vault.html?lang=csharp#retrieveaccount
 	 */
 
-	private void secureNetvaultretrievepaymentaccountrequestreturnssuccessfully(
+	private void secureNetVaultRetrievePaymentAccountRequestReturnsSuccessfully(
 			String customerId, String paymentMethodId) throws Exception {
 		// Arrange
 		RetrievePaymentAccountRequest request = new RetrievePaymentAccountRequest();
@@ -355,7 +347,7 @@ public class CustomersControllerTest {
 	 * Successful response returned from an Update Payment Account request.
 	 * https://apidocs.securenet.com/docs/vault.html?lang=csharp#updateaccount
 	 */
-	private void secureNetvaultupdatepaymentaccountrequestreturnssuccessfully(
+	private void secureNetVaultUpdatePaymentAccountRequestReturnsSuccessfully(
 			String customerId, String paymentMethodId) throws Exception {
 		// Arrange
 		UpdatePaymentMethodRequest request = new UpdatePaymentMethodRequest();
@@ -379,7 +371,7 @@ public class CustomersControllerTest {
 	 * Successful response returned from an Delete Payment Account request.
 	 * https://apidocs.securenet.com/docs/vault.html?lang=csharp#removeaccount
 	 */
-	private void secureNetvaultdeletepaymentaccountrequestreturnssuccessfully(
+	private void secureNetVaultDeletePaymentAccountRequestReturnsSuccessfully(
 			String customerId, String paymentMethodId) throws Exception {
 		// Arrange
 		RemovePaymentMethodRequest request = new RemovePaymentMethodRequest();
@@ -403,7 +395,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/recurringbilling.html?lang=csharp
 	 * #recurring
 	 */
-	private String recurringbillingcreaterecurringpaymentplanrequestreturnssuccessfully(
+	private String recurringBillingCreateRecurringPaymentPlanRequestReturnsSuccessfully(
 			String customerId, String paymentMethodId) throws Exception {
 		// Arrange
 		AddRecurringPaymentPlanRequest request = new AddRecurringPaymentPlanRequest();
@@ -445,7 +437,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/recurringbilling.html?lang=csharp
 	 * #updaterecurring
 	 */
-	private void recurringbillingupdaterecurringpaymentplanrequestreturnssuccessfully(
+	private void recurringBillingUpdateRecurringPaymentPlanRequestReturnsSuccessfully(
 			String customerId, String planId) throws Exception {
 		// Arrange
 		UpdateRecurringPaymentPlanRequest request = new UpdateRecurringPaymentPlanRequest();
@@ -471,7 +463,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/recurringbilling.html?lang=csharp#
 	 * installment
 	 */
-	private String recurringbillingcreateinstallmentplanrequestreturnssuccessfully(
+	private String recurringBillingCreateInstallmentPlanRequestReturnsSuccessfully(
 			String customerId, String paymentMethodId) throws Exception {
 		// Arrange
 		AddInstallmentPaymentPlanRequest request = new AddInstallmentPaymentPlanRequest();
@@ -511,7 +503,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/recurringbilling.html?lang=csharp#
 	 * updateinstallment
 	 */
-	private void recurringbillingupdateinstallmentplanrequestreturnssuccessfully(
+	private void recurringBillingUpdateInstallmentPlanrequestReturnsSuccessfully(
 			String customerId, String planId) throws Exception {
 		// Arrange
 		UpdateInstallmentPaymentPlanRequest request = new UpdateInstallmentPaymentPlanRequest();
@@ -534,7 +526,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/recurringbilling.html?lang=csharp
 	 * #variable
 	 */
-	private String recurringbillingcreatevariablepaymentplanrequestreturnssuccessfully(
+	private String recurringBillingCreateVariablePaymentPlanRequestReturnsSuccessfully(
 			String customerId, String paymentMethodId) throws Exception {
 		// Arrange
 		AddVariablePaymentPlanRequest request = new AddVariablePaymentPlanRequest();
@@ -557,7 +549,7 @@ public class CustomersControllerTest {
 	 * https://apidocs.securenet.com/docs/recurringbilling.html?lang=csharp
 	 * #updatevariable
 	 */
-	private void recurringbillingupdatevariablepaymentplanrequestreturnssuccessfully(
+	private void recurringBillingUpdateVariablePaymentPlanRequestReturnsSuccessfully(
 			String customerId, String planId) throws Exception {
 		// Arrange
 		UpdateVariablePaymentPlanRequest request = new UpdateVariablePaymentPlanRequest();
@@ -578,7 +570,7 @@ public class CustomersControllerTest {
 	 * https:/
 	 * /apidocs.securenet.com/docs/recurringbilling.html?lang=csharp#retrieve
 	 */
-	private void recurringbillingretrievepaymentplanrequestreturnssuccessfully(
+	private void recurringBillingRetrievePaymentPlanRequestReturnsSuccessfully(
 			String customerId, String planId) throws Exception {
 		// Arrange
 		RetrievePaymentPlanRequst request = new RetrievePaymentPlanRequst();
@@ -593,28 +585,6 @@ public class CustomersControllerTest {
 		// Assert
 	}
 
-	/**
-	 * Successful response returned from a Delete Payment Plan request.
-	 * https://apidocs
-	 * .securenet.com/docs/recurringbilling.html?lang=csharp#delete
-	 */
-	private void recurringbillingdeletepaymentplanrequestreturnssuccessfully(
-			String customerId, String planId) throws Exception {
-		// Arrange
-		DeletePaymentPlanRequest request = new DeletePaymentPlanRequest();
-		request.setCustomerId(customerId);
-		request.setPlanId(planId);
-		request.setDeveloperApplication(getDeveloperApplication());
-		APIContext apiContext = new APIContext();
-		CustomersController controller = new CustomersController();
-		// Act
-		/* [UNSUPPORTED] 'var' as type is unsupported "var" */
-		DeletePaymentPlanResponse response = (DeletePaymentPlanResponse)controller.processRequest(apiContext, request,
-				DeletePaymentPlanResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		// Assert
-	}
-	
 	private VaultCustomerAndPaymentMethodRequest getVaultCustomerAndPaymentMethodRequest(){
 		VaultCustomerAndPaymentMethodRequest customerRequest = new VaultCustomerAndPaymentMethodRequest();
 		customerRequest.setFirstName("Test");

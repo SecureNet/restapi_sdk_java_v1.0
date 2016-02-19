@@ -42,7 +42,7 @@ public class TransactionsControllerTest
     * https://apidocs.securenet.com/docs/transactions.html?lang=csharp#search
     */
 	@Test
-    public void transactionreportingandmanagementsearchtransactionrequestreturnssuccessfully() throws Exception {
+    public void transactionReportingAndManagementSearchTransactionRequestReturnsSuccessfully() throws Exception {
         // Arramge
         TransactionSearchRequest request = new TransactionSearchRequest();
         request.setDeveloperApplication(getDeveloperApplication());
@@ -60,7 +60,7 @@ public class TransactionsControllerTest
     * https://apidocs.securenet.com/docs/transactions.html?lang=csharp#retrieve
     */
 	@Test
-    public void transactionreportingandmanagementretrievetransactionrequestreturnssuccessfully() throws Exception {
+    public void transactionReportingAndManagementRetrieveTransactionRequestReturnsSuccessfully() throws Exception {
         // Arrange
         TransactionRetrieveRequest request = new TransactionRetrieveRequest();
         request.setDeveloperApplication(getDeveloperApplication());
@@ -78,7 +78,7 @@ public class TransactionsControllerTest
     * https://apidocs.securenet.com/docs/transactions.html?lang=csharp#update
     */
 	@Test
-    public void transactionreportingandmanagementupdatetransactionrequestreturnssuccessfully() throws Exception {
+    public void transactionReportingAndManagementUpdateTransactionRequestReturnsSuccessfully() throws Exception {
         // Arrange
         TransactionUpdateRequest request = new TransactionUpdateRequest();
         request.setDeveloperApplication(getDeveloperApplication());
