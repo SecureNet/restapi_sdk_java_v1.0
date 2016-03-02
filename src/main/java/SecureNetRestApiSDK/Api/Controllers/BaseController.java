@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import SNET.Core.APIContext;
 import SNET.Core.Helper;
+import SecureNetRestApiSDK.Api.Models.DeveloperApplication;
 import SecureNetRestApiSDK.Api.Requests.SecureNetRequest;
 import SecureNetRestApiSDK.Api.Responses.SecureNetResponse;
 
@@ -21,8 +22,6 @@ public abstract class BaseController {
 	        if (secureNetRequest == null) {
 	            throw new IllegalArgumentException("secureNetRequest");
 	        }
-	
-	        String payLoad =new Gson().toJson(secureNetRequest);
 	
 	        Properties config = new Properties();
 	        Dictionary<String, String> props = new Hashtable<String, String>();
@@ -48,6 +47,14 @@ public abstract class BaseController {
 	        props.put("developerId", config.getProperty("developerId"));
 	        props.put("versionId", config.getProperty("versionId"));
 	        apiContext.setConfig(props);
+
+		DeveloperApplication devApp = new DeveloperApplication();
+		devApp.setDeveloperId(new Integer(config.getProperty("developerId")));
+		devApp.setVersion(config.getProperty("versionId"));
+		secureNetRequest.setDeveloperApplication( devApp );
+
+		String payLoad =new Gson().toJson(secureNetRequest);
+
 	        String response = Helper.configureAndExecute(apiContext, secureNetRequest.getMethod(), secureNetRequest.getUri(), payLoad);
   	      	return (SecureNetResponse) new Gson().fromJson(response,responseClazz);
     	}
