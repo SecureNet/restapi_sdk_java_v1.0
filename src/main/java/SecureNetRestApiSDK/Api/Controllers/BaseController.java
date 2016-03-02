@@ -27,7 +27,16 @@ public abstract class BaseController {
 	        Properties config = new Properties();
 	        Dictionary<String, String> props = new Hashtable<String, String>();
 	
-	        InputStream stream = this.getClass().getResourceAsStream("/config.properties");
+		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		InputStream stream =  cl.getResourceAsStream("config.properties");
+		if (stream == null) {
+		   ClassLoader applicationClassLoader = BaseController.class.getClassLoader();
+		   stream = applicationClassLoader.getResourceAsStream("config.properties");
+		}
+
+		if (stream == null) {
+		   throw new IllegalArgumentException("config.properties not found");
+		}
 	        config.load(stream);
 	
 	        props.put("secureNetId", config.getProperty("secureNetId"));
