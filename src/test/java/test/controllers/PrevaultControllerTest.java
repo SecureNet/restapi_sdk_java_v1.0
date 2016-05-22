@@ -44,7 +44,7 @@ public class PrevaultControllerTest
         TokenCardRequest request = new TokenCardRequest();
         request.setDeveloperApplication(getDeveloperApplication());
         request.setCard(getCard());
-        request.setPublicKey("4672d4e5-ae4c-464a-b1be-96bdfa31c5fb");
+        request.setPublicKey(config.getProperty("publicKey"));
         APIContext apiContext = new APIContext();
         apiContext.setHTTPHeaders(getOrigin());
         PreVaultController controller = new PreVaultController();
