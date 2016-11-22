@@ -718,7 +718,7 @@ public class CustomersControllerTest {
 		card.setAddress(getAddress());
 		card.setCvv("123");
 		card.setExpirationDate("07/2018");
-		card.setNumber("5555111111111111");
+		card.setNumber("4111111111111111");
 		return card;
 	}
 	
