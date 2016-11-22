@@ -4,6 +4,8 @@
 package test.controllers;
 
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,8 @@ import SecureNetRestApiSDK.Api.Models.InstallmentPaymentPlan;
 import SecureNetRestApiSDK.Api.Models.PaymentVaultToken;
 import SecureNetRestApiSDK.Api.Models.RecurringPaymentPlan;
 import SecureNetRestApiSDK.Api.Models.UserDefinedField;
+import SecureNetRestApiSDK.Api.Models.VariablePaymentPlan;
+import SecureNetRestApiSDK.Api.Models.Schedule;
 import SecureNetRestApiSDK.Api.Requests.AddInstallmentPaymentPlanRequest;
 import SecureNetRestApiSDK.Api.Requests.AddPaymentMethodRequest;
 import SecureNetRestApiSDK.Api.Requests.AddRecurringPaymentPlanRequest;
@@ -129,8 +133,8 @@ public class CustomersControllerTest {
 		// Act
 		/* [UNSUPPORTED] 'var' as type is unsupported "var" */
 		VaultCustomerAndPaymentMethodResponse response = (VaultCustomerAndPaymentMethodResponse) controller.processRequest(apiContext, request,VaultCustomerAndPaymentMethodResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
 	/**
@@ -151,8 +155,8 @@ public class CustomersControllerTest {
 		// Act
 		/* [UNSUPPORTED] 'var' as type is unsupported "var" */
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(),response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(),response.getSuccess());
 	}
 
 	/**
@@ -176,8 +180,8 @@ public class CustomersControllerTest {
 		recurringBillingRetrievePaymentPlanRequestReturnsSuccessfully(
 				customerId, planId);
 		// Update the Installment Plan
-		/*recurringBillingUpdateInstallmentPlanRequestReturnsSuccessfully(
-				customerId, planId);*/
+		recurringBillingUpdateInstallmentPlanrequestReturnsSuccessfully(
+				customerId, planId);
 		// Delete the Payment Account
 		/*secureNetVaultDeletePaymentAccountRequestReturnsSuccessfully(
 				customerId, paymentMethodId);*/
@@ -205,6 +209,34 @@ public class CustomersControllerTest {
 				customerId, planId);
 		// Update the Recurring Payment Plan
 		recurringBillingUpdateRecurringPaymentPlanRequestReturnsSuccessfully(
+				customerId, planId);
+		// Delete the Payment Account
+		/*secureNetVaultDeletePaymentAccountRequestReturnsSuccessfully(
+				customerId, paymentMethodId);*/
+	}
+
+	/**
+	 * Unit Tests for Creating a Payment Account, Creating a Variable Payment
+	 * Plan, Updating the Variable Payment Plan, Retrieving the Variable
+	 * Payment Plan, and deleting the Variable Payment Plan requests. Tests
+	 * combined in one method to pass the required payment method identifier,
+	 * the plan identifier and to guaranteee the order of operation.
+	 */
+	@Test
+	public void recurringBillingCreateRetrieveUpdateAndDeleteVariablePaymentPlanRequestsReturnsSuccessfully()
+			throws Exception {
+		// Create the Customer
+		String customerId = secureNetVaultCreateCustomerRequestReturnsSuccessfully();
+		// Create the Payment Account
+		String paymentMethodId = secureNetVaultCreatePaymentAccountRequestReturnsSuccessfully(customerId);
+		// Create the Variable Payment Plan
+		String planId = recurringBillingCreateVariablePaymentPlanRequestReturnsSuccessfully(
+				customerId, paymentMethodId);
+		// Retrieve the Variable Payment Plan
+		recurringBillingRetrievePaymentPlanRequestReturnsSuccessfully(
+				customerId, planId);
+		// Update the Variable Payment Plan
+		recurringBillingUpdateVariablePaymentPlanRequestReturnsSuccessfully(
 				customerId, planId);
 		// Delete the Payment Account
 		/*secureNetVaultDeletePaymentAccountRequestReturnsSuccessfully(
@@ -383,8 +415,8 @@ public class CustomersControllerTest {
 		// Act
 		/* [UNSUPPORTED] 'var' as type is unsupported "var" */
 		RemovePaymentMethodResponse response = (RemovePaymentMethodResponse) controller.processRequest(apiContext, request,RemovePaymentMethodResponse.class);
-		Assert.assertTrue(response.toResponseString(),response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(),response.getSuccess());
 	}
 
 	// Delete the Customer
@@ -409,8 +441,10 @@ public class CustomersControllerTest {
 		AddRecurringPaymentPlanResponse response = (AddRecurringPaymentPlanResponse) controller
 				.processRequest(apiContext, request,
 						AddRecurringPaymentPlanResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+
 		return response.getPlanId();
 	}
 
@@ -428,6 +462,7 @@ public class CustomersControllerTest {
         plan.setPrimaryPaymentMethodId(paymentMethodId);
         plan.setNotes("This is a recurring plan");
         plan.setActive(true);
+		plan.setSoftDescriptor("Rec Plan SoftDesc");
 		return plan;
 	}
 
@@ -452,8 +487,9 @@ public class CustomersControllerTest {
 		// Act
 		/* [UNSUPPORTED] 'var' as type is unsupported "var" */
 		UpdateRecurringPaymentPlanResponse response = (UpdateRecurringPaymentPlanResponse) controller.processRequest(apiContext, request,UpdateRecurringPaymentPlanResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
 	}
 
 	// Delete the Customer
@@ -478,6 +514,9 @@ public class CustomersControllerTest {
 				.processRequest(apiContext, request,
 						AddInstallmentPaymentPlanResponse.class);
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+
 		return response.getPlanId();
 	}
 
@@ -495,6 +534,24 @@ public class CustomersControllerTest {
         plan.setNotes("This is a installment plan");
         plan.setActive(true);
         plan.setPrimaryPaymentMethodId(paymentMethodId);
+		plan.setSoftDescriptor("Inst Plan SoftDesc");
+		return plan;
+	}
+
+	private VariablePaymentPlan getVariablePaymentPlan(String paymentMethodId) {
+		VariablePaymentPlan plan = new VariablePaymentPlan();
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		try {
+			plan.setPlanStartDate(format.parse("07/02/2017"));
+			plan.setPlanEndDate(format.parse("08/05/2018"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		plan.setMaxRetries(4);
+		plan.setPrimaryPaymentMethodId(paymentMethodId);
+		plan.setNotes("This is a variable plan");
+		plan.setSoftDescriptor("Var Plan SoftDesc");
+		plan.setScheduledPayments(getSchedule());
 		return plan;
 	}
 
@@ -516,8 +573,9 @@ public class CustomersControllerTest {
 		// Act
 		/* [UNSUPPORTED] 'var' as type is unsupported "var" */
 		UpdateInstallmentPaymentPlanResponse response = (UpdateInstallmentPaymentPlanResponse) controller.processRequest(apiContext, request,UpdateInstallmentPaymentPlanResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
 	}
 
 	/**
@@ -532,6 +590,7 @@ public class CustomersControllerTest {
 		AddVariablePaymentPlanRequest request = new AddVariablePaymentPlanRequest();
 		request.setCustomerId(customerId);
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setPlan(getVariablePaymentPlan(paymentMethodId));
 		APIContext apiContext = new APIContext();
 		CustomersController controller = new CustomersController();
 		// Act
@@ -540,6 +599,9 @@ public class CustomersControllerTest {
 				.processRequest(apiContext, request,
 						AddVariablePaymentPlanResponse.class);
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+
 		return response.getPlanId();
 	}
 
@@ -556,13 +618,15 @@ public class CustomersControllerTest {
 		request.setCustomerId(customerId);
 		request.setPlanId(planId);
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setPlan(getVariablePaymentPlan("1"));
 		APIContext apiContext = new APIContext();
 		CustomersController controller = new CustomersController();
 		// Act
 		/* [UNSUPPORTED] 'var' as type is unsupported "var" */
 		UpdateVariablePaymentPlanResponse response = (UpdateVariablePaymentPlanResponse) controller.processRequest(apiContext, request,UpdateVariablePaymentPlanResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
 	}
 
 	/**
@@ -664,6 +728,22 @@ public class CustomersControllerTest {
 		paymentVaultToken.setPaymentMethodId(paymentMethodId);
 		paymentVaultToken.setPaymentType("CREDIT_CARD");
 		return paymentVaultToken;
+	}
+
+	private List<Schedule> getSchedule() {
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		List<Schedule> list = new ArrayList<Schedule>();
+		Schedule schedule = new Schedule();
+		schedule.setInstallmentDate("08/05/2017");
+		schedule.setAmount(4);
+		try {
+			schedule.setPaymentdate(format.parse("08/06/2017"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		schedule.setScheduleId(1093920);
+		list.add(schedule);
+		return list;
 	}
 
 }

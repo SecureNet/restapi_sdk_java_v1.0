@@ -49,6 +49,7 @@ public class PaymentsControllerTest {
 	@Test
 	public void creditCardPresentAuthorizationOnlyAndPriorAuthCaptureRequestsReturnsSuccessfully()
 			throws Exception {
+		// Arrange
 		int transactionId = creditCardPresentAuthorizationOnlyRequestReturnsSuccessfully();
 		PriorAuthCaptureRequest request = new PriorAuthCaptureRequest();
 		request.setAmount(20d);
@@ -56,7 +57,9 @@ public class PaymentsControllerTest {
 		request.setDeveloperApplication(getDeveloperApplication());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
+		// Act
 		PriorAuthCaptureResponse response = (PriorAuthCaptureResponse) controller.processRequest(apiContext, request, PriorAuthCaptureResponse.class);
+		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
@@ -74,12 +77,15 @@ public class PaymentsControllerTest {
 		request.setAddToVault(true);
 		request.setAmount(20d);
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
 		AuthorizeResponse response = (AuthorizeResponse) controller.processRequest(apiContext, request,AuthorizeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+
 		return response.getTransaction().getTransactionId();
 	}
 
@@ -98,14 +104,14 @@ public class PaymentsControllerTest {
 		request.setAmount(20d);
 		request.setCard(getCard());
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 	}
 
 	/**
@@ -125,8 +131,8 @@ public class PaymentsControllerTest {
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-
 		PriorAuthCaptureResponse response = (PriorAuthCaptureResponse) controller.processRequest(apiContext, request,PriorAuthCaptureResponse.class);
+		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
@@ -143,13 +149,15 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setAmount(20d);
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		AuthorizeResponse response = (AuthorizeResponse) controller.processRequest(apiContext, request,AuthorizeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+
 		return response.getTransaction().getTransactionId();
 	}
 
@@ -168,14 +176,14 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setDeveloperApplication(getDeveloperApplication());
 		request.setAmount(20d);
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 	}
 
 	/**
@@ -186,6 +194,7 @@ public class PaymentsControllerTest {
 	@Test
 	public void creditCardNotPresentAuthorizationOnlyAndPriorAuthCaptureRequestsReturnsSuccessfully()
 			throws Exception {
+		// Arrange
 		int transactionId = creditCardNotPresentAuthorizationOnlyRequestReturnsSuccessfully();
 		PriorAuthCaptureRequest request = new PriorAuthCaptureRequest();
 		request.setAmount(10d);
@@ -194,8 +203,8 @@ public class PaymentsControllerTest {
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		PriorAuthCaptureResponse response = (PriorAuthCaptureResponse) controller.processRequest(apiContext, request,PriorAuthCaptureResponse.class);
+		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
@@ -213,13 +222,15 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setAddToVault(true);
 		request.setAmount(20d);
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		AuthorizeResponse response = (AuthorizeResponse) controller.processRequest(apiContext, request,AuthorizeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+
 		return response.getTransaction().getTransactionId();
 	}
 
@@ -239,17 +250,16 @@ public class PaymentsControllerTest {
 		request.setAddToVault(true);
 		request.setAmount(100d);
 		request.setDeveloperApplication(getDeveloperApplication());
-		ExtendedInformation extendedInfo = new ExtendedInformation();
+		ExtendedInformation extendedInfo = getExtendedInformation();
 		extendedInfo.setTypeOfGoods("PHYSICAL");
 		request.setExtendedInformation(extendedInfo);
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 	}
 
 	/**
@@ -265,17 +275,16 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setAmount(80d);
 		request.setDeveloperApplication(getDeveloperApplication());
-		ExtendedInformation extendedInfo = new ExtendedInformation();
+		ExtendedInformation extendedInfo = getExtendedInformation();
 		extendedInfo.setTypeOfGoods("PHYSICAL");
 		request.setExtendedInformation(extendedInfo);
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 	}
 
 	/**
@@ -290,17 +299,16 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setAmount(80d);
 		request.setDeveloperApplication(getDeveloperApplication());
-		ExtendedInformation extendedInfo = new ExtendedInformation();
+		ExtendedInformation extendedInfo = getExtendedInformation();
 		extendedInfo.setTypeOfGoods("PHYSICAL");
 		request.setExtendedInformation(extendedInfo);
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 	}
 
 	/**
@@ -318,11 +326,9 @@ public class PaymentsControllerTest {
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
 	/**
@@ -356,9 +362,9 @@ public class PaymentsControllerTest {
 		PaymentsController controller = new PaymentsController();
 		// Act
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 	}
 
 	/**
@@ -381,11 +387,9 @@ public class PaymentsControllerTest {
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
 	/**
@@ -408,11 +412,9 @@ public class PaymentsControllerTest {
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
 	/**
@@ -427,14 +429,14 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setAmount(1.05d);
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		CreditResponse  response = (CreditResponse) controller.processRequest(apiContext, request,CreditResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
-
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 	}
 
 	/**
@@ -452,8 +454,8 @@ public class PaymentsControllerTest {
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		RefundResponse response = (RefundResponse) controller.processRequest(apiContext, request,RefundResponse.class);
+		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
@@ -468,13 +470,14 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setAmount(10d);
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -494,8 +497,8 @@ public class PaymentsControllerTest {
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		VoidResponse response = (VoidResponse) controller.processRequest(apiContext, request,VoidResponse.class);
+		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 	}
 
@@ -510,13 +513,14 @@ public class PaymentsControllerTest {
 		request.setCard(getCard());
 		request.setAmount(10d);
 		request.setDeveloperApplication(getDeveloperApplication());
+		request.setExtendedInformation(getExtendedInformation());
 		APIContext apiContext = new APIContext();
 		PaymentsController controller = new PaymentsController();
 		// Act
-		 
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
-		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		// Assert
+		Assert.assertTrue(response.toResponseString(), response.getSuccess());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -555,5 +559,11 @@ public class PaymentsControllerTest {
 		check.setRoutingNumber("222371863");
 		check.setAccountNumber("123456");
 		return check;
+	}
+
+	private ExtendedInformation getExtendedInformation() {
+		ExtendedInformation extendedInfo = new ExtendedInformation();
+		extendedInfo.setSoftDescriptor("Soft Descriptor");
+		return extendedInfo;
 	}
 }
