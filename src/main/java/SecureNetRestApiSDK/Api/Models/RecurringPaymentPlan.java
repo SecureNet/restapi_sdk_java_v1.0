@@ -155,7 +155,7 @@ public class RecurringPaymentPlan
     }
 
 
-	private String softDescriptor = new String();
+    private String softDescriptor = new String();
     public String getSoftDescriptor() {
         return softDescriptor;
     }
