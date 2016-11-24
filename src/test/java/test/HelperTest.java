@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class HelperTest {
     private Boolean _isSoftDescriptorEnabled ;
-    private final String SoftDescriptorValue = "Valid Soft Descriptor";
+    private String SoftDescriptorValue = "Valid Soft Descriptor";
     private Properties config ;
     private String _requestSoftDescriptor;
     private String _responseSoftDescriptor;
