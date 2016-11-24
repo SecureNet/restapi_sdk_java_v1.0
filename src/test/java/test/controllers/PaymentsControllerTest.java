@@ -3,6 +3,7 @@
 
 package test.controllers;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -30,16 +31,19 @@ import SecureNetRestApiSDK.Api.Responses.CreditResponse;
 import SecureNetRestApiSDK.Api.Responses.PriorAuthCaptureResponse;
 import SecureNetRestApiSDK.Api.Responses.RefundResponse;
 import SecureNetRestApiSDK.Api.Responses.VoidResponse;
+import test.HelperTest;
 
 public class PaymentsControllerTest {
 	
 	Properties config ;
+	HelperTest helper;
 	
 	@Before
 	public void before() throws Exception{
 		InputStream stream  = this.getClass().getResourceAsStream("/config.properties");
 		config = new Properties();
 		config.load(stream);
+		helper = new HelperTest();
 	}
 	/**
 	 * Unit Tests for an AuthorizationOnly request and a subsequent
@@ -84,7 +88,7 @@ public class PaymentsControllerTest {
 		AuthorizeResponse response = (AuthorizeResponse) controller.processRequest(apiContext, request,AuthorizeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -111,7 +115,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -156,7 +160,7 @@ public class PaymentsControllerTest {
 		AuthorizeResponse response = (AuthorizeResponse) controller.processRequest(apiContext, request,AuthorizeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -183,7 +187,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -229,7 +233,7 @@ public class PaymentsControllerTest {
 		AuthorizeResponse response = (AuthorizeResponse) controller.processRequest(apiContext, request,AuthorizeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -259,7 +263,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -284,7 +288,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -308,7 +312,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -364,7 +368,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -436,7 +440,7 @@ public class PaymentsControllerTest {
 		CreditResponse  response = (CreditResponse) controller.processRequest(apiContext, request,CreditResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -477,7 +481,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -520,7 +524,7 @@ public class PaymentsControllerTest {
 		ChargeResponse response = (ChargeResponse) controller.processRequest(apiContext, request,ChargeResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), request.getExtendedInformation().getSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -563,7 +567,7 @@ public class PaymentsControllerTest {
 
 	private ExtendedInformation getExtendedInformation() {
 		ExtendedInformation extendedInfo = new ExtendedInformation();
-		extendedInfo.setSoftDescriptor("Soft Descriptor");
+		extendedInfo.setSoftDescriptor(helper.getRequestSoftDescriptor());
 		return extendedInfo;
 	}
 }

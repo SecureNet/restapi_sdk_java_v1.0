@@ -3,6 +3,7 @@
 
 package test.controllers;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,16 +60,19 @@ import SecureNetRestApiSDK.Api.Responses.UpdatePaymentMethodResponse;
 import SecureNetRestApiSDK.Api.Responses.UpdateRecurringPaymentPlanResponse;
 import SecureNetRestApiSDK.Api.Responses.UpdateVariablePaymentPlanResponse;
 import SecureNetRestApiSDK.Api.Responses.VaultCustomerAndPaymentMethodResponse;
+import test.HelperTest;
 
 public class CustomersControllerTest {
 	
 	Properties config ;
+	HelperTest helper;
 	
 	@Before
 	public void before() throws Exception{
 		InputStream stream  = this.getClass().getResourceAsStream("/config.properties");
 		config = new Properties();
 		config.load(stream);
+		helper = new HelperTest();
 	}
 	
 	
@@ -443,7 +447,7 @@ public class CustomersControllerTest {
 						AddRecurringPaymentPlanResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getPlanId();
 	}
@@ -462,7 +466,7 @@ public class CustomersControllerTest {
         plan.setPrimaryPaymentMethodId(paymentMethodId);
         plan.setNotes("This is a recurring plan");
         plan.setActive(true);
-		plan.setSoftDescriptor("Rec Plan SoftDesc");
+		plan.setSoftDescriptor(helper.getRequestSoftDescriptor());
 		return plan;
 	}
 
@@ -489,7 +493,7 @@ public class CustomersControllerTest {
 		UpdateRecurringPaymentPlanResponse response = (UpdateRecurringPaymentPlanResponse) controller.processRequest(apiContext, request,UpdateRecurringPaymentPlanResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	// Delete the Customer
@@ -515,7 +519,7 @@ public class CustomersControllerTest {
 						AddInstallmentPaymentPlanResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getPlanId();
 	}
@@ -534,7 +538,7 @@ public class CustomersControllerTest {
         plan.setNotes("This is a installment plan");
         plan.setActive(true);
         plan.setPrimaryPaymentMethodId(paymentMethodId);
-		plan.setSoftDescriptor("Inst Plan SoftDesc");
+		plan.setSoftDescriptor(helper.getRequestSoftDescriptor());
 		return plan;
 	}
 
@@ -550,7 +554,7 @@ public class CustomersControllerTest {
 		plan.setMaxRetries(4);
 		plan.setPrimaryPaymentMethodId(paymentMethodId);
 		plan.setNotes("This is a variable plan");
-		plan.setSoftDescriptor("Var Plan SoftDesc");
+		plan.setSoftDescriptor(helper.getRequestSoftDescriptor());
 		plan.setScheduledPayments(getSchedule());
 		return plan;
 	}
@@ -575,7 +579,7 @@ public class CustomersControllerTest {
 		UpdateInstallmentPaymentPlanResponse response = (UpdateInstallmentPaymentPlanResponse) controller.processRequest(apiContext, request,UpdateInstallmentPaymentPlanResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
@@ -600,7 +604,7 @@ public class CustomersControllerTest {
 						AddVariablePaymentPlanResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 
 		return response.getPlanId();
 	}
@@ -626,7 +630,7 @@ public class CustomersControllerTest {
 		UpdateVariablePaymentPlanResponse response = (UpdateVariablePaymentPlanResponse) controller.processRequest(apiContext, request,UpdateVariablePaymentPlanResponse.class);
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
-		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), request.getPlan().getSoftDescriptor());
+		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
 	}
 
 	/**
