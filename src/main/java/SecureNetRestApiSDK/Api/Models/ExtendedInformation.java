@@ -155,6 +155,18 @@ public class ExtendedInformation
     public void setInvoiceDescription(String value) {
         invoiceDescription = value;
     }
+	
+	/**
+     * Displays a description in addition to the merchants DBA.
+     */
+    private String softDescriptor = new String();
+    public String getSoftDescriptor() {
+        return softDescriptor;
+    }
+
+    public void setSoftDescriptor(String value) {
+        softDescriptor = value;
+    }
 
 }
 

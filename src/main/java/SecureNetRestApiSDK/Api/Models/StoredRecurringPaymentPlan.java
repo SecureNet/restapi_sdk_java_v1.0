@@ -162,6 +162,15 @@ public class StoredRecurringPaymentPlan
         schedules = value;
     }
 
+    private String softDescriptor = new String();
+    public String getSoftDescriptor() {
+        return softDescriptor;
+    }
+
+    public void setSoftDescriptor(String value) {
+        softDescriptor = value;
+    }
+
 }
 
 

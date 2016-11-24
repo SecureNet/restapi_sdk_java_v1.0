@@ -41,6 +41,7 @@ public class PrevaultControllerTest
     
 	@Test
     public void tokenizationCreateTokenUsingCreditCardRequest() throws Exception {
+        // Arrange
         TokenCardRequest request = new TokenCardRequest();
         request.setDeveloperApplication(getDeveloperApplication());
         request.setCard(getCard());
@@ -48,12 +49,15 @@ public class PrevaultControllerTest
         APIContext apiContext = new APIContext();
         apiContext.setHTTPHeaders(getOrigin());
         PreVaultController controller = new PreVaultController();
+        // Act
         TokenCardResponse response = (TokenCardResponse) controller.processRequest(apiContext,request,TokenCardResponse.class);
+        // Assert
         Assert.assertTrue(response.toResponseString(), response.getSuccess());
     }
 	
 	@Test
     public void tokenizationCreateTokenUsingCheckingInformationRequestReturnsSuccessfully() throws Exception {
+        // Arrange
         TokenCheckRequest request = new TokenCheckRequest();
         request.setCheck(getCheck());
         request.setDeveloperApplication(getDeveloperApplication());
@@ -61,7 +65,9 @@ public class PrevaultControllerTest
         APIContext apiContext = new APIContext();
         apiContext.setHTTPHeaders(getOrigin());
         PreVaultController controller = new PreVaultController();
+        // Act
         TokenCheckResponse response = (TokenCheckResponse) controller.processRequest(apiContext,request,TokenCheckResponse.class);
+        // Assert
         Assert.assertTrue(response.toResponseString(), response.getSuccess());
     }
 	

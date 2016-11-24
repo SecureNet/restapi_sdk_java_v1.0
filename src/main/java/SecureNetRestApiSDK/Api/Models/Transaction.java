@@ -448,6 +448,15 @@ public class Transaction
         imageResult = value;
     }
 
+    private String softDescriptor = new String();
+    public String getSoftDescriptor() {
+        return softDescriptor;
+    }
+
+    public void setSoftDescriptor(String value) {
+        softDescriptor = value;
+    }
+
 }
 
 
