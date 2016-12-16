@@ -168,6 +168,18 @@ public class ExtendedInformation
         softDescriptor = value;
     }
 
+	/**
+     * Displays a 4 characters dynamic merchant category code.
+     */
+    private String dynamicMCC = new String();
+    public String getDynamicMCC() {
+        return dynamicMCC;
+    }
+
+    public void setDynamicMCC(String value) {
+        dynamicMCC = value;
+    }
+
 }
 
 

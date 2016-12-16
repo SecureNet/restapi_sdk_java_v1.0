@@ -171,6 +171,15 @@ public class StoredRecurringPaymentPlan
         softDescriptor = value;
     }
 
+    private String dynamicMCC = new String();
+    public String getDynamicMCC() {
+        return dynamicMCC;
+    }
+
+    public void setDynamicMCC(String value) {
+        dynamicMCC = value;
+    }
+
 }
 
 

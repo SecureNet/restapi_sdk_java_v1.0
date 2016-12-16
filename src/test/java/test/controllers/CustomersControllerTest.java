@@ -448,6 +448,7 @@ public class CustomersControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getDynamicMCC(), helper.getResponseDynamicMCC());
 
 		return response.getPlanId();
 	}
@@ -467,6 +468,7 @@ public class CustomersControllerTest {
         plan.setNotes("This is a recurring plan");
         plan.setActive(true);
 		plan.setSoftDescriptor(helper.getRequestSoftDescriptor());
+		plan.setDynamicMCC(helper.getRequestDynamicMCC());
 		return plan;
 	}
 
@@ -494,6 +496,7 @@ public class CustomersControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getStoredRecurringPaymentPlan().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	// Delete the Customer
@@ -520,6 +523,7 @@ public class CustomersControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getDynamicMCC(), helper.getResponseDynamicMCC());
 
 		return response.getPlanId();
 	}
@@ -539,6 +543,7 @@ public class CustomersControllerTest {
         plan.setActive(true);
         plan.setPrimaryPaymentMethodId(paymentMethodId);
 		plan.setSoftDescriptor(helper.getRequestSoftDescriptor());
+		plan.setDynamicMCC(helper.getRequestDynamicMCC());
 		return plan;
 	}
 
@@ -555,6 +560,7 @@ public class CustomersControllerTest {
 		plan.setPrimaryPaymentMethodId(paymentMethodId);
 		plan.setNotes("This is a variable plan");
 		plan.setSoftDescriptor(helper.getRequestSoftDescriptor());
+		plan.setDynamicMCC(helper.getRequestDynamicMCC());
 		plan.setScheduledPayments(getSchedule());
 		return plan;
 	}
@@ -580,6 +586,7 @@ public class CustomersControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getStoredInstallmentPaymentPlan().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -605,6 +612,7 @@ public class CustomersControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getStoredVariablePaymentPlan().getDynamicMCC(), helper.getResponseDynamicMCC());
 
 		return response.getPlanId();
 	}
@@ -631,6 +639,7 @@ public class CustomersControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getStoredVariablePaymentPlan().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getStoredVariablePaymentPlan().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**

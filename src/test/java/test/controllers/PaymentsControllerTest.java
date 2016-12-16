@@ -87,9 +87,10 @@ public class PaymentsControllerTest {
 		// Act
 		AuthorizeResponse response = (AuthorizeResponse) controller.processRequest(apiContext, request,AuthorizeResponse.class);
 		// Assert
+
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
-
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 		return response.getTransaction().getTransactionId();
 	}
 
@@ -116,6 +117,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -161,6 +163,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -188,6 +191,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -234,6 +238,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -264,6 +269,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -289,6 +295,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -313,6 +320,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -369,6 +377,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -441,6 +450,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 	}
 
 	/**
@@ -482,6 +492,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -525,6 +536,7 @@ public class PaymentsControllerTest {
 		// Assert
 		Assert.assertTrue(response.toResponseString(), response.getSuccess());
 		Assert.assertEquals(response.getTransaction().getSoftDescriptor(), helper.getResponseSoftDescriptor());
+		Assert.assertEquals(response.getTransaction().getDynamicMCC(), helper.getResponseDynamicMCC());
 
 		return response.getTransaction().getTransactionId();
 	}
@@ -568,6 +580,7 @@ public class PaymentsControllerTest {
 	private ExtendedInformation getExtendedInformation() {
 		ExtendedInformation extendedInfo = new ExtendedInformation();
 		extendedInfo.setSoftDescriptor(helper.getRequestSoftDescriptor());
+		extendedInfo.setDynamicMCC(helper.getRequestDynamicMCC());
 		return extendedInfo;
 	}
 }
